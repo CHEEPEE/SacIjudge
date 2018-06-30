@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:paddingBottom="50dp"
+    android:layout_margin="15dp"
+    android:background="@drawable/modal_round"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/modalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Welcome"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/judgeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Judge Name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/modalLabel"
+        app:layout_constraintStart_toStartOf="@+id/modalLabel"
+        app:layout_constraintTop_toBottomOf="@+id/modalLabel" />
+
+    <TextView
+        android:id="@+id/judgeDes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:textColor="@color/textSecondary"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Judge Description"
+        app:layout_constraintEnd_toEndOf="@+id/judgeName"
+        app:layout_constraintStart_toStartOf="@+id/judgeName"
+        app:layout_constraintTop_toBottomOf="@+id/judgeName" />
+
+    <Button
+        android:id="@+id/btnInputAccessCode"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/btn_round_corner"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:drawableTint="@color/colorWhite"
+        android:paddingLeft="30dp"
+        android:paddingRight="10dp"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/judgeDes" />
+
+
+</android.support.constraint.ConstraintLayout>

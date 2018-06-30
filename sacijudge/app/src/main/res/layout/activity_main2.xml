@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AccessContest">
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView"
+        android:layout_width="100sp"
+        android:layout_height="100sp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:visibility="gone"
+        app:indicatorColor="@color/colorPrimary"
+        app:indicatorName="PacmanIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/modalLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
+        android:fontFamily="sans-serif-condensed"
+        android:text="Input Access Code"
+        android:textColor="@color/textColor"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/inptAccessCode"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/inptAccessCode"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/input_text_background"
+
+        android:drawablePadding="20dp"
+        android:drawableStart="@drawable/ic_create_black_24dp"
+        android:drawableTint="@color/colorPrimaryDark"
+        android:hint="Access Code Here"
+        android:inputType="textPersonName"
+        android:paddingLeft="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHint="@color/colorWhite"
+        android:textSize="13dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnInputAccessCode"
+
+        app:layout_constraintEnd_toEndOf="@+id/modalLabel"
+        app:layout_constraintStart_toStartOf="@id/modalLabel" />
+
+    <TextView
+        android:id="@+id/loadingMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="almost there . . "
+        android:visibility="gone"
+        android:textColor="@color/textColor"
+        app:layout_constraintEnd_toEndOf="@+id/avi"
+        app:layout_constraintStart_toStartOf="@+id/avi"
+        app:layout_constraintTop_toBottomOf="@+id/avi" />
+
+    <Button
+        android:id="@+id/btnQrCode"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/btn_round_corner"
+        android:drawablePadding="5dp"
+        android:drawableStart="@drawable/ic_crop_free_black_24dp"
+        android:drawableTint="@color/colorWhite"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:text="Scan using QR Code"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnInputAccessCode" />
+
+
+    <Button
+        android:id="@+id/btnInputAccessCode"
+        android:layout_width="250dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/btn_round_corner"
+        android:drawableTint="@color/colorWhite"
+        android:text="Continue"
+        android:drawableRight="@drawable/ic_keyboard_arrow_right_black_24dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="10dp"
+        android:textAllCaps="false"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

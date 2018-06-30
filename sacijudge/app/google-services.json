@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "227280456315",
+    "firebase_url": "https://sacjudge-d22dc.firebaseio.com",
+    "project_id": "sacjudge-d22dc",
+    "storage_bucket": "sacjudge-d22dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227280456315:android:83f92b37c876cbce",
+        "android_client_info": {
+          "package_name": "com.ijudge.sacijudge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227280456315-46m42jv2svo0j8cs5ohf16bnida2boet.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ijudge.sacijudge",
+            "certificate_hash": "7c459a08b1abaca944ad265fe7cba80b03505d2c"
+          }
+        },
+        {
+          "client_id": "227280456315-mo94trmj8lqfp3gqfsm4sgu2v2avnelj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH8YpJvKgHp6Z-01pUFJHtfpc4hrmaJZ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227280456315-mo94trmj8lqfp3gqfsm4sgu2v2avnelj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
