@@ -1,5 +1,7 @@
 package com.ijudge.sacijudge;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +9,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.support.v7.widget.Toolbar;
@@ -33,6 +37,7 @@ public class TabulationActivity extends AppCompatActivity {
     ArrayList<ContestantModel> contestantModelArrayList = new ArrayList<>();
     SlidingRootNav slidingRootNav;
     ImageView menu;
+
 
 
     @Override
@@ -82,7 +87,6 @@ public class TabulationActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TabulationActivity.this);
         rv_contestants.setLayoutManager(layoutManager);
         rv_contestants.setAdapter(contestantsRecyclerViewAdapter);
-
         FirebaseDatabase.getInstance().getReference().child("candidates").child(eventId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -106,4 +110,54 @@ public class TabulationActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+        confirmExit();
+
+    }
+
+    private void confirmExit(){
+        final Dialog dialog = new Dialog(TabulationActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setContentView(R.layout.confirm_exit);
+        TextView cancel  = (TextView) dialog.findViewById(R.id.cancelbtn);
+        TextView logout = (TextView) dialog.findViewById(R.id.logoutBtn);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(TabulationActivity.this,AccessContest.class);
+                startActivity(i);
+                finish();
+            }
+        });
+       /* TextView title = (TextView) dialog.findViewById(R.id.dTitle);
+        TextView buttonClose = (TextView) dialog.findViewById(R.id.buttonClose);
+        TextView overview = (TextView) dialog.findViewById(R.id.dOverview);
+        TextView release_date = (TextView) dialog.findViewById(R.id.release_date);
+        release_date.setText("Release Date: "+moviesModel.getRelease_date());
+        ImageView dPosterImage = (ImageView) dialog.findViewById(R.id.dPosterImage);
+        TextView popularity = (TextView) dialog.findViewById(R.id.popularity);
+        TextView vote = (TextView) dialog.findViewById(R.id.vote);
+        vote.setText("Average Vote: "+moviesModel.getVote_average()+"/10");
+        title.setText(moviesModel.getTitle());
+        overview.setText(moviesModel.getOverview());
+        popularity.setText("Popularity: "+moviesModel.getPopularity());
+
+        GlideApp.with(context).load(Utils.posterPrePath+moviesModel.getPoster_path()).diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().into(dPosterImage);*/
+
+        dialog.show();
+        Window window = dialog.getWindow();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+    }
 }

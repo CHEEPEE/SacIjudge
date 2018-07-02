@@ -86,7 +86,7 @@
         android:drawableTint="@color/colorWhite"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:text="Scan using QR Code"
+        android:text="Scan QR Code"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
         app:layout_constraintEnd_toEndOf="parent"

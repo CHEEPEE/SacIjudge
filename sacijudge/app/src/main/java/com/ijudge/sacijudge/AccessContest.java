@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseException;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -36,7 +38,7 @@ public class AccessContest extends AppCompatActivity{
     TextView loadingMessage;
     EditText inptAccessCode;
     TextView modalLabel;
-
+    ConstraintLayout container;
 
 
     @Override
@@ -44,6 +46,7 @@ public class AccessContest extends AppCompatActivity{
         super.onCreate(state);
         setContentView(R.layout.activity_main2);
         avi = (AVLoadingIndicatorView) findViewById(R.id.avi);
+        container = (ConstraintLayout) findViewById(R.id.container);
         btnScanQRCode =(Button) findViewById(R.id.btnQrCode);
         btnIptAccesCode = (Button) findViewById(R.id.btnInputAccessCode);
         loadingMessage = (TextView) findViewById(R.id.loadingMessage);
@@ -58,7 +61,48 @@ public class AccessContest extends AppCompatActivity{
         btnIptAccesCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startAnim();
+                Utils.hideKeyboard(AccessContest.this);
+              if (!inptAccessCode.getText().toString().trim().equals("") && inptAccessCode.getText().toString().trim() != null ){
+                  startAnim();
+                 try {
+                     FirebaseDatabase.getInstance().getReference().child("routeJudges").child(inptAccessCode.getText().toString()).child("eventid").addValueEventListener(new ValueEventListener() {
+                         @Override
+                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                             try {
+                                 final String eventID = dataSnapshot.getValue().toString();
+                                 FirebaseDatabase.getInstance().getReference().child("judges").child(dataSnapshot.getValue().toString()).child(inptAccessCode.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                     @Override
+                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                         JudgeModel judgeModel = new JudgeModel();
+                                         System.out.println(dataSnapshot.toString());
+                                         JudgesMapModel judgesMapModel = dataSnapshot.getValue(JudgesMapModel.class);
+                                         System.out.println(judgesMapModel.judgeName);
+                                         judgeModal(judgesMapModel.judgeName,judgesMapModel.judgeDescription,eventID,judgesMapModel.judgeId);
+                                         stopAnim();
+                                     }
+                                     @Override
+                                     public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                     }
+                                 });
+                             }catch (NullPointerException e){
+                                 System.out.println(e);
+                                 stopAnim();
+                                 Utils.popup(container,"Check Access Code");
+                             }
+                         }
+
+                         @Override
+                         public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                         }
+                     });
+                 }catch (DatabaseException e){
+                     System.out.println(e);
+                     stopAnim();
+                     Utils.popup(container,"check Access Code");
+                 }
+              }
             }
         });
 
