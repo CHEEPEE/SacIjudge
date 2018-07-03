@@ -1,4 +1,4 @@
-package com.ijudge.sacijudge;
+package com.ijudge.sacijudge.models;
 
 public class ContestantModel {
     private String contestantId;

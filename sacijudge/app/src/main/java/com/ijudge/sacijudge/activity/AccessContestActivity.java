@@ -1,4 +1,4 @@
-package com.ijudge.sacijudge;
+package com.ijudge.sacijudge.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -25,13 +25,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
+import com.ijudge.sacijudge.mapmodels.JudgesMapModel;
+import com.ijudge.sacijudge.R;
+import com.ijudge.sacijudge.Utils;
+import com.ijudge.sacijudge.models.JudgeModel;
 import com.wang.avi.AVLoadingIndicatorView;
 
 
-public class AccessContest extends AppCompatActivity{
+public class AccessContestActivity extends AppCompatActivity{
     private static final int ZXING_CAMERA_PERMISSION = 1;
 
-    private Class<?> mClss = AccessContest.class;
+    private Class<?> mClss = AccessContestActivity.class;
     AVLoadingIndicatorView avi;
     Button btnScanQRCode;
     Button btnIptAccesCode;
@@ -61,7 +65,7 @@ public class AccessContest extends AppCompatActivity{
         btnIptAccesCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Utils.hideKeyboard(AccessContest.this);
+                Utils.hideKeyboard(AccessContestActivity.this);
               if (!inptAccessCode.getText().toString().trim().equals("") && inptAccessCode.getText().toString().trim() != null ){
                   startAnim();
                  try {
@@ -160,7 +164,7 @@ public class AccessContest extends AppCompatActivity{
 
     }
     private void startScanning(){
-        IntentIntegrator integrator = new IntentIntegrator(AccessContest.this);
+        IntentIntegrator integrator = new IntentIntegrator(AccessContestActivity.this);
         integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
         integrator.setPrompt("Scan");
         integrator.setCameraId(0);
@@ -191,7 +195,7 @@ public class AccessContest extends AppCompatActivity{
     }
 
     private void judgeModal(String judgeName, String judgeDes, final String eventid, final String judgeID){
-        final Dialog dialog = new Dialog(AccessContest.this);
+        final Dialog dialog = new Dialog(AccessContestActivity.this);
         dialog.setCancelable(true);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCanceledOnTouchOutside(false);
@@ -205,7 +209,7 @@ public class AccessContest extends AppCompatActivity{
         btnInputAccessCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i =new Intent(AccessContest.this,TabulationActivity.class);
+                Intent i =new Intent(AccessContestActivity.this,TabulationActivity.class);
                 i.putExtra("eventId",eventid);
                 i.putExtra("judgeID",judgeID);
                 startActivity(i);

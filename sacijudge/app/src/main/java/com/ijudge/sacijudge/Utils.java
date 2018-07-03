@@ -27,4 +27,10 @@ public class Utils {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+    public static String candidates(){
+        return "candidates";
+    }
+    public static String critiria(){
+        return "criteria";
+    }
 }

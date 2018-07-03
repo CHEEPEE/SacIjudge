@@ -1,9 +1,10 @@
-package com.ijudge.sacijudge;
+package com.ijudge.sacijudge.activity;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,17 +14,18 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.support.v7.widget.Toolbar;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ijudge.sacijudge.mapmodels.ContestantMapModel;
+import com.ijudge.sacijudge.views.ContestantsRecyclerViewAdapter;
+import com.ijudge.sacijudge.R;
+import com.ijudge.sacijudge.Utils;
+import com.ijudge.sacijudge.models.ContestantModel;
 import com.yarolegovich.slidingrootnav.SlidingRootNav;
 import com.yarolegovich.slidingrootnav.SlidingRootNavBuilder;
-import com.yarolegovich.slidingrootnav.SlidingRootNavLayout;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -37,6 +39,8 @@ public class TabulationActivity extends AppCompatActivity {
     ArrayList<ContestantModel> contestantModelArrayList = new ArrayList<>();
     SlidingRootNav slidingRootNav;
     ImageView menu;
+    ConstraintLayout container;
+    Context context;
 
 
 
@@ -50,6 +54,8 @@ public class TabulationActivity extends AppCompatActivity {
         eventId = bundle.getString("eventId");
         judgeId = bundle.getString("judgeID");
         menu = (ImageView) findViewById(R.id.ic_menu);
+        context = TabulationActivity.this;
+        container = (ConstraintLayout) findViewById(R.id.container);
         FirebaseDatabase.getInstance().getReference().child("events").child(eventId).child("eventname").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -90,7 +96,7 @@ public class TabulationActivity extends AppCompatActivity {
         FirebaseDatabase.getInstance().getReference().child("candidates").child(eventId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
+                contestantModelArrayList.clear();
                 for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                     ContestantModel contestantModel = new ContestantModel();
                     ContestantMapModel contestantMapModel = dataSnapshot1.getValue(ContestantMapModel.class);
@@ -108,6 +114,18 @@ public class TabulationActivity extends AppCompatActivity {
 
             }
         });
+        contestantsRecyclerViewAdapter.setOnItemClickListener(new ContestantsRecyclerViewAdapter.OnItemClickLitener() {
+            @Override
+            public void onItemClick(View view, int position, ContestantModel contestantModel) {
+                Utils.popup(container,contestantModel.getContestantId());
+                Intent i =  new Intent(context,ContestantRatingActivity.class);
+                i.putExtra("eventId",eventId);
+                i.putExtra("contestantId",contestantModel.getContestantId());
+                i.putExtra("judgeId",judgeId);
+                startActivity(i);
+            }
+        });
+
     }
 
     @Override
@@ -135,29 +153,16 @@ public class TabulationActivity extends AppCompatActivity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(TabulationActivity.this,AccessContest.class);
+                Intent i = new Intent(TabulationActivity.this,AccessContestActivity.class);
                 startActivity(i);
                 finish();
             }
         });
-       /* TextView title = (TextView) dialog.findViewById(R.id.dTitle);
-        TextView buttonClose = (TextView) dialog.findViewById(R.id.buttonClose);
-        TextView overview = (TextView) dialog.findViewById(R.id.dOverview);
-        TextView release_date = (TextView) dialog.findViewById(R.id.release_date);
-        release_date.setText("Release Date: "+moviesModel.getRelease_date());
-        ImageView dPosterImage = (ImageView) dialog.findViewById(R.id.dPosterImage);
-        TextView popularity = (TextView) dialog.findViewById(R.id.popularity);
-        TextView vote = (TextView) dialog.findViewById(R.id.vote);
-        vote.setText("Average Vote: "+moviesModel.getVote_average()+"/10");
-        title.setText(moviesModel.getTitle());
-        overview.setText(moviesModel.getOverview());
-        popularity.setText("Popularity: "+moviesModel.getPopularity());
-
-        GlideApp.with(context).load(Utils.posterPrePath+moviesModel.getPoster_path()).diskCacheStrategy(DiskCacheStrategy.ALL).centerCrop().into(dPosterImage);*/
-
         dialog.show();
         Window window = dialog.getWindow();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
     }
+
+
 }

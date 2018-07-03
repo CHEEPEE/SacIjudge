@@ -1,4 +1,4 @@
-package com.ijudge.sacijudge;
+package com.ijudge.sacijudge.mapmodels;
 
 import com.google.firebase.database.Exclude;
 

@@ -14,7 +14,7 @@
     </style>
     <style name="TextStandard">
         <item name="android:textStyle">bold</item>
-        <item name="android:textColor">@color/textColor</item>
+        <item name="android:textColor">@color/textSecondary</item>
         <item name="android:textSize">@dimen/text_standart_size</item>
     </style>
     <style name="TextSecondary">

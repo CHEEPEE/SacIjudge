@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:padding="15dp"
+    android:id="@+id/container"
     android:layout_marginLeft="15dp"
     android:layout_marginRight="15dp"
     android:layout_marginTop="15dp"
@@ -13,14 +14,16 @@
 
 
 
-            <TextView
-                style="@style/TextStandard"
-                android:id="@+id/contestant_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Contestant Name" />
+    <TextView
+        android:clickable="false"
+        style="@style/TextStandard"
+        android:id="@+id/contestant_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contestant Name" />
 
     <TextView
+        android:clickable="false"
         android:id="@+id/contestant_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
