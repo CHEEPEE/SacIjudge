@@ -17,6 +17,15 @@
         <item name="android:textColor">@color/textSecondary</item>
         <item name="android:textSize">@dimen/text_standart_size</item>
     </style>
+    <style name="ratingInputText">
+        <item name="android:width">70dp</item>
+        <item name="android:height">70dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">40dp</item>
+        <item name="android:background">@drawable/input_rating_btn_round_corner</item>
+    </style>
     <style name="TextSecondary">
         <item name="android:textSize">@dimen/text_secondary_size</item>
         <item name="android:textColor">@color/textSecondary</item>

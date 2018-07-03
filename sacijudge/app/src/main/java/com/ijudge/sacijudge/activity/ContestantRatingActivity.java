@@ -113,7 +113,7 @@ public class ContestantRatingActivity extends AppCompatActivity {
         TextView nameCriteria = (TextView) dialog.findViewById(R.id.criteriaName);
         nameCriteria.setText(criteriaName);
         final TextView inputRating = (TextView) dialog.findViewById(R.id.inputRating);
-        
+
         final TextView[] inputNumber = new TextView[11];
 
         int textInputId[] = {R.id.zero,R.id.one,R.id.two,R.id.three,R.id.four,R.id.five,R.id.six,R.id.seven,R.id.eight,R.id.nine,R.id.ten};
