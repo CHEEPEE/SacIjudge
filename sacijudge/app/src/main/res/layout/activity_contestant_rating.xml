@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/container"
     tools:context=".activity.ContestantRatingActivity">
 
     <TextView
@@ -25,13 +26,13 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/done"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/contestantName" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/done"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
@@ -39,7 +40,7 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:paddingTop="4dp"
-        android:text="Save Result"
+        android:text="Done"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="25dp"

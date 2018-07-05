@@ -32,6 +32,4 @@ public class ContestantMapModel {
 
         return result;
     }
-
-
 }

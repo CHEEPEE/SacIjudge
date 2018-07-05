@@ -89,11 +89,12 @@ public class TabulationActivity extends AppCompatActivity {
         });
 
 
-        contestantsRecyclerViewAdapter = new ContestantsRecyclerViewAdapter(TabulationActivity.this,contestantModelArrayList);
+        contestantsRecyclerViewAdapter = new ContestantsRecyclerViewAdapter(TabulationActivity.this,contestantModelArrayList,judgeId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TabulationActivity.this);
         rv_contestants.setLayoutManager(layoutManager);
         rv_contestants.setAdapter(contestantsRecyclerViewAdapter);
-        FirebaseDatabase.getInstance().getReference().child("candidates").child(eventId).addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("candidates")
+                .child(eventId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 contestantModelArrayList.clear();

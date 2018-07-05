@@ -189,7 +189,7 @@
         android:layout_width="85dp"
         android:layout_height="80dp"
         android:foregroundGravity="center"
-        android:src="@drawable/ic_check_circle_black_24dp"
+        app:srcCompat="@drawable/ic_check_circle_black_24dp"
         android:textColor="@color/textLightDark"
         android:tint="@color/lighterGray"
         app:layout_constraintEnd_toEndOf="parent"

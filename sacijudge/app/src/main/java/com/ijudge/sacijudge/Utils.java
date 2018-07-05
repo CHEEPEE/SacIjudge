@@ -33,4 +33,7 @@ public class Utils {
     public static String critiria(){
         return "criteria";
     }
+    public static String ratings(){
+        return "ratings";
+    }
 }

@@ -1,6 +1,7 @@
 package com.ijudge.sacijudge.views;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,8 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.ijudge.sacijudge.R;
-import com.ijudge.sacijudge.models.ContestantModel;
+import com.ijudge.sacijudge.Utils;
+import com.ijudge.sacijudge.mapmodels.ContestantRatingMapModel;
 import com.ijudge.sacijudge.models.CriteriaModel;
 
 import java.util.ArrayList;
@@ -21,12 +27,15 @@ import java.util.ArrayList;
 public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRecyclerViewAdapter.MyViewHolder> {
    private ArrayList<CriteriaModel> criteriaModels = new ArrayList<>();
    private Context context;
+   private String contestantId;
+   private String judgeId;
 
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
     TextView criteriaName,criteriaPercent;
     ConstraintLayout container;
+
 
 
         public MyViewHolder(View view){
@@ -39,9 +48,12 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
         }
     }
 
-    public CriteriaRecyclerViewAdapter(Context c, ArrayList<CriteriaModel> criteriaModels){
+    public CriteriaRecyclerViewAdapter(Context c, ArrayList<CriteriaModel> criteriaModels,String contestantId,String judgeId){
       this.criteriaModels = criteriaModels;
       this.context = c;
+      this.contestantId = contestantId;
+      this.judgeId = judgeId;
+
 
     }
 
@@ -69,6 +81,27 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
           }
       });
       holder.criteriaName.setText(criteriaModels.get(position).getCriteriaName());
+        FirebaseDatabase.getInstance().getReference()
+                .child(Utils.ratings())
+                .child("event"+criteriaModels.get(position).getEventKey())
+                .child("contestant"+contestantId)
+                .child("judge"+judgeId)
+                .child(criteriaModels.get(position).getCriteriaKey()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ContestantRatingMapModel contestantRatingMapModel = dataSnapshot.getValue(ContestantRatingMapModel.class);
+               try {
+                   holder.criteriaPercent.setText(contestantRatingMapModel.rating);
+               }catch (NullPointerException e){
+
+               }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 //      holder.criteriaPercent.setText(criteriaModels.get(position).getCriteriaPercentage()+"%");
     }
 
