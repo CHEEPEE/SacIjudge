@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -44,7 +45,6 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
             contestantName = (TextView) view.findViewById(R.id.contestant_name);
             contestantDescription = (TextView) view.findViewById(R.id.contestant_description);
             container = (ConstraintLayout) view.findViewById(R.id.container);
-
         }
     }
 
@@ -97,8 +97,18 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
                                         int t = 0;
                                         for (int i = 0;i<total.size();i++){
                                             t+=total.get(i);
+
                                         }
                                         holder.contestantDescription.setText((t*.1)+" %");
+                                        FirebaseDatabase.getInstance().getReference().child("resultTotal")
+                                                .child("event"+contestantModelPos.getEventId())
+                                                .child("contestant"+contestantModelPos.getContestantId())
+                                                .child("judge"+judgeId).child("totalRating").setValue(t*.1).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+
+                                            }
+                                        });
                                     }
 
                                     @Override

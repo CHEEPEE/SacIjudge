@@ -221,6 +221,7 @@ public class AccessContestActivity extends AppCompatActivity{
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
 
+
     }
 }
 
