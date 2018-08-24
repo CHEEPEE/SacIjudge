@@ -24,6 +24,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="25%"
+        app:layout_constraintBottom_toBottomOf="@+id/criteriaName"
+        app:layout_constraintStart_toEndOf="@+id/criteriaName"
+        app:layout_constraintTop_toTopOf="@+id/criteriaName" />
+
+    <TextView
         android:clickable="false"
         android:id="@+id/criteriaPercent"
         android:layout_width="wrap_content"

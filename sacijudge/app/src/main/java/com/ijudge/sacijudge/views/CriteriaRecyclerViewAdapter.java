@@ -33,8 +33,9 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-    TextView criteriaName,criteriaPercent;
+    TextView criteriaName,criteriaPercent,percent;
     ConstraintLayout container;
+
 
 
 
@@ -43,7 +44,7 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
             criteriaName = (TextView) view.findViewById(R.id.criteriaName);
             criteriaPercent = (TextView) view.findViewById(R.id.criteriaPercent);
             container = (ConstraintLayout) view.findViewById(R.id.container);
-
+            percent = (TextView) view.findViewById(R.id.percent);
 
         }
     }
@@ -102,7 +103,7 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
 
             }
         });
-//      holder.criteriaPercent.setText(criteriaModels.get(position).getCriteriaPercentage()+"%");
+      holder.percent.setText(criteriaModels.get(position).getCriteriaPercentage()+"%");
     }
 
     @Override

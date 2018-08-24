@@ -41,9 +41,7 @@ public class TabulationActivity extends AppCompatActivity {
     ImageView menu;
     ConstraintLayout container;
     Context context;
-
-
-
+    TextView help;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,8 +51,9 @@ public class TabulationActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         eventId = bundle.getString("eventId");
         judgeId = bundle.getString("judgeID");
-        menu = (ImageView) findViewById(R.id.ic_menu);
+
         context = TabulationActivity.this;
+        help = (TextView) findViewById(R.id.help);
         container = (ConstraintLayout) findViewById(R.id.container);
         FirebaseDatabase.getInstance().getReference().child("events").child(eventId).child("eventname").addValueEventListener(new ValueEventListener() {
             @Override
@@ -67,7 +66,13 @@ public class TabulationActivity extends AppCompatActivity {
 
             }
         });
-        slidingRootNav = new SlidingRootNavBuilder(this)
+        help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpText();
+            }
+        });
+ /*       slidingRootNav = new SlidingRootNavBuilder(this)
                 .withMenuOpened(false)
                 .withContentClickableWhenMenuOpened(false)
                 .withSavedState(savedInstanceState)
@@ -86,7 +91,7 @@ public class TabulationActivity extends AppCompatActivity {
                     slidingRootNav.openMenu(true);
                 }
             }
-        });
+        });*/
 
 
         contestantsRecyclerViewAdapter = new ContestantsRecyclerViewAdapter(TabulationActivity.this,contestantModelArrayList,judgeId);
@@ -159,6 +164,17 @@ public class TabulationActivity extends AppCompatActivity {
                 finish();
             }
         });
+        dialog.show();
+        Window window = dialog.getWindow();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+    }
+    private void helpText(){
+        final Dialog dialog = new Dialog(TabulationActivity.this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setContentView(R.layout.help_text);
         dialog.show();
         Window window = dialog.getWindow();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
