@@ -73,7 +73,7 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
                 mOnItemClickLitener.onItemClick(v,position,contestantModelPos);
             }
         });
-      /*  FirebaseDatabase.getInstance().getReference().child(Utils.ratings())
+        FirebaseDatabase.getInstance().getReference().child(Utils.ratings())
                 .child("event"+contestantModelPos.getEventId())
                 .child("contestant"+contestantModelPos.getContestantId())
                 .child("judge"+judgeId)
@@ -99,7 +99,7 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
                                             t+=total.get(i);
 
                                         }
-                                        holder.contestantDescription.setText((t*.1)+" %");
+//                                        holder.contestantDescription.setText((t*.1)+" %");
                                         FirebaseDatabase.getInstance().getReference().child("resultTotal")
                                                 .child("event"+contestantModelPos.getEventId())
                                                 .child("contestant"+contestantModelPos.getContestantId())
@@ -127,7 +127,7 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
-        });*/
+        });
 
     }
 
