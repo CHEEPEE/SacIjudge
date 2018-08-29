@@ -16,7 +16,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:text="First, Click on the Contestant's Name then choose a Criteria for Judging then rate the Contestant from 0-10 each criteria. You can still change the score anytime you want.
+        android:text="First, Click on the Contestant's Name then choose a Criteria for Judging then rate the Contestant from 1-10 each criteria. You can still change the score anytime you want.
 "
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

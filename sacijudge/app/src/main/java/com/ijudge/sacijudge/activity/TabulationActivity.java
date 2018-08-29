@@ -94,7 +94,7 @@ public class TabulationActivity extends AppCompatActivity {
         });*/
 
 
-        contestantsRecyclerViewAdapter = new ContestantsRecyclerViewAdapter(TabulationActivity.this,contestantModelArrayList,judgeId);
+        contestantsRecyclerViewAdapter = new ContestantsRecyclerViewAdapter(TabulationActivity.this,contestantModelArrayList,judgeId,eventId);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(TabulationActivity.this);
         rv_contestants.setLayoutManager(layoutManager);
         rv_contestants.setAdapter(contestantsRecyclerViewAdapter);
@@ -120,17 +120,7 @@ public class TabulationActivity extends AppCompatActivity {
 
             }
         });
-        contestantsRecyclerViewAdapter.setOnItemClickListener(new ContestantsRecyclerViewAdapter.OnItemClickLitener() {
-            @Override
-            public void onItemClick(View view, int position, ContestantModel contestantModel) {
-                Utils.popup(container,contestantModel.getContestantId());
-                Intent i =  new Intent(context,ContestantRatingActivity.class);
-                i.putExtra("eventId",eventId);
-                i.putExtra("contestantId",contestantModel.getContestantId());
-                i.putExtra("judgeId",judgeId);
-                startActivity(i);
-            }
-        });
+
 
     }
 

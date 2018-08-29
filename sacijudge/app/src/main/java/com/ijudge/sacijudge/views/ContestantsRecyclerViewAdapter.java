@@ -1,6 +1,7 @@
 package com.ijudge.sacijudge.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.ijudge.sacijudge.R;
 import com.ijudge.sacijudge.Utils;
+import com.ijudge.sacijudge.activity.ContestantRatingActivity;
 import com.ijudge.sacijudge.mapmodels.ContestantMapModel;
 import com.ijudge.sacijudge.mapmodels.ContestantRatingMapModel;
 import com.ijudge.sacijudge.mapmodels.CriteriaMapModel;
@@ -30,15 +32,16 @@ import java.util.ArrayList;
 public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<ContestantsRecyclerViewAdapter.MyViewHolder> {
     private ArrayList<ContestantModel> contestantsModel;
     private Context context;
-    private ConstraintLayout container;
+
     private String judgeId;
+    private String eventId;
 
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
        public TextView contestantName,contestantDescription,judgeId;
-
+       public ConstraintLayout container;
 
         public MyViewHolder(View view){
             super(view);
@@ -48,10 +51,11 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
         }
     }
 
-    public ContestantsRecyclerViewAdapter(Context c, ArrayList<ContestantModel> contestantModel,String judgeId){
+    public ContestantsRecyclerViewAdapter(Context c, ArrayList<ContestantModel> contestantModel,String judgeId,String eventId){
         this.contestantsModel = contestantModel;
         this.context = c;
         this.judgeId = judgeId;
+        this.eventId = eventId;
     }
 
     @Override
@@ -67,10 +71,14 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
         final ContestantModel contestantModelPos = contestantsModel.get(position);
         holder.contestantName.setText(contestantModelPos.getContestantName());
         holder.contestantDescription.setText(contestantModelPos.getContestantDescription());
-        container.setOnClickListener(new View.OnClickListener() {
+        holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickLitener.onItemClick(v,position,contestantModelPos);
+                Intent i =  new Intent(context,ContestantRatingActivity.class);
+                i.putExtra("eventId",eventId);
+                i.putExtra("contestantId",contestantModelPos.getContestantId());
+                i.putExtra("judgeId",judgeId);
+                context.startActivity(i);
             }
         });
         FirebaseDatabase.getInstance().getReference().child(Utils.ratings())
