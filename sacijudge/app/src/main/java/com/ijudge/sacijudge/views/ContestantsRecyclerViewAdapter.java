@@ -123,7 +123,7 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
                                                 for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                                                     numnerofCri++;
                                                 }
-                                                holder.status.setText(fNumOfCriteriaAnswered==numnerofCri? "Done":"Please Answer Fill Up criteria");
+                                                holder.status.setText(fNumOfCriteriaAnswered==numnerofCri? "Done":"Please fill up all the criteria");
 
                                             }
 
