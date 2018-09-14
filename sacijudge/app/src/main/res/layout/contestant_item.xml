@@ -32,6 +32,15 @@
         app:layout_constraintStart_toStartOf="@+id/contestant_name"
         app:layout_constraintTop_toBottomOf="@+id/contestant_name" />
 
+    <TextView
+        android:id="@+id/status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Status"
+        app:layout_constraintStart_toStartOf="@+id/contestant_description"
+        app:layout_constraintTop_toBottomOf="@+id/contestant_description" />
+
 
 
 

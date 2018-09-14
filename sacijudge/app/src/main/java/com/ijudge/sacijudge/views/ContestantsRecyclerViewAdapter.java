@@ -22,6 +22,7 @@ import com.ijudge.sacijudge.mapmodels.ContestantMapModel;
 import com.ijudge.sacijudge.mapmodels.ContestantRatingMapModel;
 import com.ijudge.sacijudge.mapmodels.CriteriaMapModel;
 import com.ijudge.sacijudge.models.ContestantModel;
+import com.ijudge.sacijudge.models.CriteriaModel;
 
 import java.util.ArrayList;
 
@@ -38,9 +39,10 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
 
 
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
-       public TextView contestantName,contestantDescription,judgeId;
+       public TextView contestantName,contestantDescription,judgeId,status;
        public ConstraintLayout container;
 
         public MyViewHolder(View view){
@@ -48,6 +50,8 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
             contestantName = (TextView) view.findViewById(R.id.contestant_name);
             contestantDescription = (TextView) view.findViewById(R.id.contestant_description);
             container = (ConstraintLayout) view.findViewById(R.id.container);
+            status = (TextView) view.findViewById(R.id.status);
+
         }
     }
 
@@ -70,6 +74,7 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         final ContestantModel contestantModelPos = contestantsModel.get(position);
         holder.contestantName.setText(contestantModelPos.getContestantName());
+        holder.status.setText("No Ratings Yet");
         holder.contestantDescription.setText(contestantModelPos.getContestantDescription());
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,11 +108,33 @@ public class ContestantsRecyclerViewAdapter extends RecyclerView.Adapter<Contest
                                         total.add(Integer.parseInt(criteriaMapModel.criteriaPercentage)
                                                 *Integer.parseInt(contestantRatingMapModel.rating));
                                         int t = 0;
+                                        int numberOfCriteriaAnswered = 0;
                                         for (int i = 0;i<total.size();i++){
                                             t+=total.get(i);
+                                            numberOfCriteriaAnswered++;
 
                                         }
+                                        final int fNumOfCriteriaAnswered = numberOfCriteriaAnswered;
+
+                                        FirebaseDatabase.getInstance().getReference().child(Utils.critiria()).child(eventId).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                int numnerofCri = 0;
+                                                for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                                                    numnerofCri++;
+                                                }
+                                                holder.status.setText(fNumOfCriteriaAnswered==numnerofCri? "Done":"Please Answer Fill Up criteria");
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
+
 //                                        holder.contestantDescription.setText((t*.1)+" %");
+
                                         FirebaseDatabase.getInstance().getReference().child("resultTotal")
                                                 .child("event"+contestantModelPos.getEventId())
                                                 .child("contestant"+contestantModelPos.getContestantId())
