@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.database.DataSnapshot;
@@ -86,7 +87,11 @@ public class ContestantRatingActivity extends AppCompatActivity {
         done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+               if (criteriaRecyclerViewAdapter.validateRate()){
+                   finish();
+               }else {
+                   Toast.makeText(ContestantRatingActivity.this,"Please fill up all criteria",Toast.LENGTH_SHORT).show();
+               }
             }
         });
 
@@ -184,4 +189,9 @@ public class ContestantRatingActivity extends AppCompatActivity {
         });
 
     }
+
+    void confirmRatingDone(){
+
+    }
+
 }

@@ -29,6 +29,8 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
    private Context context;
    private String contestantId;
    private String judgeId;
+   private boolean rate = true;
+   private ArrayList<Boolean> validateRatings = new ArrayList<>();
 
 
 
@@ -81,6 +83,7 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
               mOnItemClickLitener.onItemClick(v,position,criteriaModels.get(position));
           }
       });
+
       holder.criteriaName.setText(criteriaModels.get(position).getCriteriaName());
         FirebaseDatabase.getInstance().getReference()
                 .child(Utils.ratings())
@@ -91,9 +94,12 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ContestantRatingMapModel contestantRatingMapModel = dataSnapshot.getValue(ContestantRatingMapModel.class);
+
                try {
                    holder.criteriaPercent.setText(contestantRatingMapModel.rating);
+                   validateRatings.add(true);
                }catch (NullPointerException e){
+
 
                }
             }
@@ -121,6 +127,13 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
     public void setOnItemClickListener(OnItemClickLitener mOnItemClickLitener) {
         this.mOnItemClickLitener = mOnItemClickLitener;
     }
+
+    public boolean validateRate(){
+
+
+        return criteriaModels.size()==validateRatings.size();
+    }
+
 }
 
 
