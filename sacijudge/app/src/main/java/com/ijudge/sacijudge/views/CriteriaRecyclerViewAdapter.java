@@ -94,12 +94,12 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 ContestantRatingMapModel contestantRatingMapModel = dataSnapshot.getValue(ContestantRatingMapModel.class);
-
                try {
                    holder.criteriaPercent.setText(contestantRatingMapModel.rating);
-                   validateRatings.add(true);
+                   if (!contestantRatingMapModel.rating.equals(null)){
+                       validateRatings.add(true);
+                   }
                }catch (NullPointerException e){
-
 
                }
             }
@@ -129,9 +129,7 @@ public class CriteriaRecyclerViewAdapter extends RecyclerView.Adapter<CriteriaRe
     }
 
     public boolean validateRate(){
-
-
-        return criteriaModels.size()==validateRatings.size();
+        return criteriaModels.size()<=validateRatings.size();
     }
 
 }

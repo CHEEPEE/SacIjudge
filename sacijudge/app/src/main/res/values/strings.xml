@@ -5,4 +5,9 @@
     <string name="title_announcements">Announcement</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="help">1. Click on the Contestant \'s Name. \n\n
+2. Choose a Criterion for judging the contestant.\n\n
+3. Rate the Contestant from 0-10 rating scale (0 is the lowest and 10 is the highest) then click the check (✔️).\n\n
+4. The same procedure with other criteria. After rating all criteria, click the \"Done\" to rate other contestants.\n\n
+5. You can still go back anytime to edit the scores of the contestants as long as the contest category is not finished.</string>
 </resources>

@@ -171,7 +171,6 @@ public class AccessContestActivity extends AppCompatActivity{
         integrator.setBeepEnabled(false);
         integrator.setBarcodeImageEnabled(false);
         integrator.initiateScan();
-
     }
     void startAnim(){
         avi.show();
